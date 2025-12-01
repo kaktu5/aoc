@@ -17,6 +17,20 @@
       devShells.default = pkgs.mkShell {
         name = "aoc-devshell";
         packages = attrValues {
+          # haskell tooling
+          ghc' = pkgs.haskellPackages.ghcWithPackages (pkgs': (attrValues {
+            inherit
+              (pkgs')
+              flow
+              split
+              ;
+          }));
+          inherit
+            (pkgs.haskellPackages)
+            fourmolu
+            haskell-language-server
+            ;
+
           # nix tooling
           inherit
             (pkgs)
@@ -25,13 +39,6 @@
             nixd
             statix
             ;
-          # haskell tooling
-          inherit
-            (pkgs.haskellPackages)
-            fourmolu
-            haskell-language-server
-            ;
-          ghc' = pkgs.haskellPackages.ghcWithPackages (pkgs': [pkgs'.split]);
         };
       };
 
