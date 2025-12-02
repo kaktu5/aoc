@@ -3,6 +3,7 @@
 module Part2 where
 
 import Data.Functor ((<&>))
+import Data.List (isInfixOf)
 import Data.List.Split (splitOn)
 import Flow
 
@@ -16,17 +17,7 @@ parseInput =
       )
 
 isInvalid :: Int -> Bool
-isInvalid n =
-  let s = show n
-      len = length s
-   in [1 .. len `div` 2]
-        |> any
-          ( \plen ->
-              len `mod` plen == 0
-                && let repeats = len `div` plen
-                       pattern = take plen s
-                    in repeats >= 2 && s == concat (replicate repeats pattern)
-          )
+isInvalid = show .> \s -> s `isInfixOf` drop 1 (init <| s ++ s)
 
 invalidInRange :: (Int, Int) -> [Int]
 invalidInRange (start, end) = filter isInvalid [start .. end]
