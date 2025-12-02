@@ -1,11 +1,11 @@
 indentation: 2
 column-limit: 120
-function-arrows: leading-args
+function-arrows: leading
 import-export-style: leading
 import-grouping: by-qualified
 record-brace-space: true
 haddock-style: single-line
-let-style: mixed
+let-style: inline
 sort-constraints: true
 sort-derived-classes: true
 sort-deriving-clauses: true
